@@ -29,4 +29,9 @@ services = {
 bookings = []
 print("Welcome to Braid Haven Booking System!")
 
-Display 
+print("1. Make a booking")
+print("2. View bookings")
+print("3. Exit")
+
+option = input("Choose an option: ")
+option = 1
