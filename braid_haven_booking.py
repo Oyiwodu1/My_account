@@ -7,10 +7,6 @@ class VIP(Customer):
     def __init__(self, name, phone_number, vip_benefit):
         super().__init__(name, phone_number)
         self.vip_benefit = vip_benefit
-vip1 = VIP("faith", "08056278153", "10% discount")
-print(vip1.name)
-print(vip1.phone_number)
-print(vip1.vip_benefit)
 
 class Booking:
     def __init__(self, customer, hairstyle, date, time):
@@ -34,4 +30,21 @@ print("2. View bookings")
 print("3. Exit")
 
 option = input("Choose an option: ")
-option = 1
+
+if option == "1":
+    name = input("What is your name? ")
+    number = input("Your phone number: ")
+    vip = input("Are you a VIP customer? ")
+
+    if vip == "yes":
+        vip_benefit = input("what vip benefit do you have? ")
+        client = VIP(name, number, vip_benefit)
+
+    else:
+        client = Customer(name, number)
+
+    for styles in services:
+        print(styles)
+    selected_style = input("Choose a style: ")
+    price = services[selected_style]
+    print(price)
