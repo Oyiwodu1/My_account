@@ -23,6 +23,13 @@ services = {
     "Jada wayda": 34000
 }
 
+
+available_slots = {
+            "October 8": ["10:00AM", "3:30PM"],
+            "October 15": ["8:00AM", "1:30PM", "4:00PM"],
+            "October 21": ["9:30AM"]
+        }
+        
 bookings = []
 
 print("Welcome to Braid Haven Booking System!")
@@ -54,29 +61,33 @@ while True:
         price = services[selected_style]
         print(price)
 
-        available_slots = {
-            "October 8": ["10:00AM", "3:30PM"],
-            "October 15": ["8:00AM", "1:30PM", "4:00PM"],
-            "October 21": ["9:30AM"]
-        }
 
         for date in available_slots:
             print(date)
             print(f"Available times: {available_slots[date]}")
 
         booking_date = input("Choose a date: ")
-        print(available_slots[booking_date])
-        booking_time = input("Choose a time: ")
+        if booking_date in available_slots:
+            print(available_slots[booking_date])
+            booking_time = input("Choose a time: ")
 
-        booking = Booking(client, selected_style, price, booking_date, booking_time)
-        bookings.append(booking)
-        print("Booking successful!")
+            if booking_time in available_slots[booking_date]:
+                booking = Booking(client, selected_style, price, booking_date, booking_time)
+                bookings.append(booking)
+                print("Booking successful!")
+                available_slots[booking_date].remove(booking_time)
+            else:
+                print("That time is not available!")
+        else:
+            print("Booking date not available!")
+
 
     elif option == "2":
         if bookings:
             for book in bookings:
                 print("--- Booking Details---")
                 print(f"Name: {book.customer.name}")
+                print(f"Contact:{book.customer.phone_number}")
                 print(f"Hairstyle: {book.hairstyle}")
                 print(f"Price: {book.price}")
                 print(f"Date: {book.date}")
